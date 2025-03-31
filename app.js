@@ -26,6 +26,7 @@ function addTodos() {
 
     handleCompletedTodo(todoItems);
   }
+  handleSaveTodos();
 }
 
 // cash the delete-btn class
@@ -34,6 +35,7 @@ function handleDeleteBtn(todoItems) {
   let deleteBtn = todoItems.querySelector(".delete-btn");
   deleteBtn.addEventListener("click", () => {
     todoItems.remove();
+    handleSaveTodos();
   });
 }
 
@@ -47,7 +49,27 @@ function handleCompletedTodo(todoItems) {
 
   checkedBox.addEventListener("click", () => {
     todoText.classList.toggle("checked");
+    handleSaveTodos();
   });
+}
+
+//// save todos in local storage
+// create array of todos
+// select all todos with queryAll
+// iterate over the todos and push them as obj to array
+// set them to local storage
+function handleSaveTodos() {
+  const todos = [];
+  let todoItems = todoList.querySelectorAll("li");
+
+  todoItems.forEach((todo) => {
+    let todoText = todo.querySelector(".todo-text").textContent;
+    let checkedTodo = todo
+      .querySelector("todo-text")
+      .classList.contains("checkedTodo");
+    todos.push({ text: todoText, completed: checkedTodo });
+  });
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 // attach event listener to form and validate the input before submit.
