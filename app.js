@@ -15,9 +15,9 @@ function addTodos() {
   if (todosInputValue) {
     let todoItems = document.createElement("li");
     todoItems.innerHTML = `
-    <input type="checkbox" class="task-checkbox">
-              <span class="task-text">${todosInputValue}</span>
-              <button class="delete-button">Delete</button>
+    <input type="checkbox" class="todo-checkbox">
+              <span class="todo-text">${todosInputValue}</span>
+              <button class="delete-btn">Delete</button>
     `;
     todoList.appendChild(todoItems);
     todosInputValue = "";
@@ -25,4 +25,24 @@ function addTodos() {
   }
 }
 
-addTodos();
+// attach event listener to form and validate the input before submit.
+// remember the event prevent default
+// make sure to cut the white spaces
+// display the error message using is valid variable
+// call the addTodos helper at the end
+
+todoForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!todoInput.value.trim()) {
+    isValidMsg.textContent = "Enter your todos.";
+    return;
+  } else if (todoInput.value.trim().length < 4) {
+    isValidMsg.textContent = "todo must be 4 or more characters long.";
+    return;
+  } else {
+    isValidMsg.textContent = ""; //clear any previous message.
+  }
+
+  addTodos();
+});
