@@ -21,7 +21,17 @@ function addTodos() {
     `;
     todoList.appendChild(todoItems);
     todoInput.value = "";
+    handleDeleteBtn(todoItems);
   }
+}
+
+// cash the delete-btn class
+//  add eventlistener to it and call remove item on todo items in cal back func.
+function handleDeleteBtn(todoItems) {
+  let deleteBtn = todoItems.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", () => {
+    todoItems.remove();
+  });
 }
 
 // attach event listener to form and validate the input before submit.
@@ -40,7 +50,7 @@ todoForm.addEventListener("submit", (e) => {
     isValidMsg.textContent = "todo must be 4 or more characters long.";
     return;
   } else {
-    isValidMsg.textContent = ""; //clear any previous message.
+    isValidMsg.textContent = "";
   }
 
   addTodos();
