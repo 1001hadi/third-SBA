@@ -84,3 +84,8 @@ h1 {
   flex-grow: 1;
   font-size: 1.4rem;
 }
+
+.checked {
+  text-decoration: line-through;
+  color: rgb(1, 174, 65);
+}

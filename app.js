@@ -15,13 +15,16 @@ function addTodos() {
   if (todosInputValue) {
     let todoItems = document.createElement("li");
     todoItems.innerHTML = `
-    <input type="checkbox" class="todo-checkbox">
+    <input type="checkbox" class="checkedTodo">
               <span class="todo-text">${todosInputValue}</span>
               <button class="delete-btn">X</button>
     `;
     todoList.appendChild(todoItems);
     todoInput.value = "";
+
     handleDeleteBtn(todoItems);
+
+    handleCompletedTodo(todoItems);
   }
 }
 
@@ -31,6 +34,19 @@ function handleDeleteBtn(todoItems) {
   let deleteBtn = todoItems.querySelector(".delete-btn");
   deleteBtn.addEventListener("click", () => {
     todoItems.remove();
+  });
+}
+
+// cash the checkbox and todo-text classes
+// with help of eventlistener toggle on completed todo
+
+function handleCompletedTodo(todoItems) {
+  let checkedBox = todoItems.querySelector(".checkedTodo");
+  let todoText = todoItems.querySelector(".todo-text");
+  console.log(todoText);
+
+  checkedBox.addEventListener("click", () => {
+    todoText.classlist.toggle("checked");
   });
 }
 
