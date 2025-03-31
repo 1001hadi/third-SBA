@@ -20,8 +20,7 @@ function addTodos() {
               <button class="delete-btn">Delete</button>
     `;
     todoList.appendChild(todoItems);
-    todosInputValue = "";
-    console.log(todoItems);
+    todoInput.value = "";
   }
 }
 
