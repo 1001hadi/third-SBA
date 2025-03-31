@@ -8,6 +8,22 @@
     <title>ToDo List SBA</title>
   </head>
   <body>
-    <h1>Hello TODOs</h1>
+    <div class="container">
+      <h1>My Todos</h1>
+      <form id="todos-form">
+        <div class="todo-input">
+          <input
+            type="text"
+            id="todo-input"
+            minlength="4"
+            placeholder="Add todo..."
+            required
+          />
+          <button id="addBtn" type="submit">Add Todo</button>
+        </div>
+        <p id="isValid-msg" style="color: red"></p>
+      </form>
+      <ul id="todos-list"></ul>
+    </div>
   </body>
 </html>
