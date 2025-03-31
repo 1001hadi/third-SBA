@@ -17,7 +17,7 @@ body {
 }
 
 h1 {
-  color: #c66b03;
+  color: #014f86;
   font-weight: bold;
   font-size: 2.5rem;
   text-align: center;
@@ -37,8 +37,8 @@ h1 {
 }
 
 #add-btn {
-  background: #003049;
-  color: #c66b03;
+  background: #5aa9e6;
+  color: #014f86;
   font-weight: bold;
   margin-left: 5px;
   padding: 10px 15px;
@@ -48,22 +48,23 @@ h1 {
 }
 
 #add-btn:hover {
-  background: #014164;
-  color: #fb8500;
+  background: #338dd3;
+  color: #014f86;
 }
 
 .delete-btn {
-  background: #c1121f;
+  background: #ea0d1c;
   color: #fdf0d5;
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
+  text-align: center;
   border-radius: 50%;
   padding: 4px 10px;
   cursor: pointer;
 }
 
 .delete-btn:hover {
-  background: #ea0d1c;
+  background: #c10814;
 }
 
 #todos-list {

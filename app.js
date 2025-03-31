@@ -17,7 +17,7 @@ function addTodos() {
     todoItems.innerHTML = `
     <input type="checkbox" class="checkedTodo">
               <span class="todo-text">${todosInputValue}</span>
-              <button class="delete-btn">X</button>
+              <button class="delete-btn">x</button>
     `;
     todoList.appendChild(todoItems);
     todoInput.value = "";
