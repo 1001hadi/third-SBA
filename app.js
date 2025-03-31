@@ -43,10 +43,10 @@ function handleDeleteBtn(todoItems) {
 function handleCompletedTodo(todoItems) {
   let checkedBox = todoItems.querySelector(".checkedTodo");
   let todoText = todoItems.querySelector(".todo-text");
-  console.log(todoText);
+  //   console.log(todoText);
 
   checkedBox.addEventListener("click", () => {
-    todoText.classlist.toggle("checked");
+    todoText.classList.toggle("checked");
   });
 }
 
