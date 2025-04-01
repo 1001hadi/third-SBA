@@ -141,3 +141,23 @@ todoForm.addEventListener("submit", (e) => {
 
   addTodos();
 });
+
+// handle dom content loading,
+// to ensuring the loadTodos function is called after the DOM is loaded
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadTodos();
+  handleTodosCount();
+  ////
+  // check for new user
+  // if user is new display welcome message with alert()
+  // otherwise display their todos and let them know their last visit
+  localStorage.setItem("lastVisit", new Date());
+  if (localStorage.getItem("lastVisit")) {
+    alert(
+      `Welcome back! Your last visit was: ${localStorage.getItem("lastVisit")}`
+    );
+  } else {
+    alert(`Welcome! is This  your first visit?`);
+  }
+});
