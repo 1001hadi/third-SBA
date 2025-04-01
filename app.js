@@ -3,6 +3,8 @@ const todoInput = document.getElementById("todo-input");
 const isValidMsg = document.getElementById("isValid-msg");
 const todoList = document.getElementById("todos-list");
 
+loadTodos();
+
 // create adding todo helper function
 // make sure remove the white space of input
 // check if there is input value
@@ -30,27 +32,27 @@ function addTodos() {
 
 // cash the delete-btn class
 //  add eventlistener to it and call remove item on todo items in cal back func.
-function handleDeleteBtn(todoItems) {
-  let deleteBtn = todoItems.querySelector(".delete-btn");
-  deleteBtn.addEventListener("click", () => {
-    todoItems.remove();
-    handleSaveTodos();
-  });
-}
+// function handleDeleteBtn(todoItems) {
+//   let deleteBtn = todoItems.querySelector(".delete-btn");
+//   deleteBtn.addEventListener("click", () => {
+//     todoItems.remove();
+//     handleSaveTodos();
+//   });
+// }
 
 // cash the checkbox and todo-text classes
 // with help of eventlistener toggle on completed todo
 
-function handleCompletedTodo(todoItems) {
-  let checkedBox = todoItems.querySelector(".checkedTodo");
-  let todoText = todoItems.querySelector(".todo-text");
-  //   console.log(todoText);
+// function handleCompletedTodo(todoItems) {
+//   let checkedBox = todoItems.querySelector(".checkedTodo");
+//   let todoText = todoItems.querySelector(".todo-text");
+//   //   console.log(todoText);
 
-  checkedBox.addEventListener("click", () => {
-    todoText.classList.toggle("checked");
-    handleSaveTodos();
-  });
-}
+//   checkedBox.addEventListener("click", () => {
+//     todoText.classList.toggle("checked");
+//     handleSaveTodos();
+//   });
+// }
 
 //// save todos in local storage
 // create array of todos
@@ -68,6 +70,22 @@ function handleSaveTodos() {
     todos.push({ text: todoText, completed: checkedTodo });
   });
   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+// loading todos from local storage.
+function loadTodos() {
+  let savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  savedTodos.forEach((todo) => {
+    let todos = document.createElement("li");
+    todos.innerHTML = `
+      <input type="checkbox" class="checkedTodo">
+      <span class="todo-text ${todo.completed ? "checked" : ""}">${
+      todo.text
+    }</span>
+      <button class="delete-btn">x</button>
+    `;
+    todoList.appendChild(todos);
+  });
 }
 
 // add eventListener to todoList and handle the delete and checkBoxes.
