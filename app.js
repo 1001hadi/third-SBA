@@ -65,7 +65,7 @@ function handleSaveTodos() {
 
   todoItems.forEach((todo) => {
     let todoText = todo.querySelector(".todo-text").textContent;
-    let checkedSpan = todo.querySelector("todo-text");
+    let checkedSpan = todo.querySelector(".todo-text");
     let checkedTodo = checkedSpan.classList.contains("checked");
     todos.push({ text: todoText, completed: checkedTodo });
   });
