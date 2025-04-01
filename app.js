@@ -18,45 +18,21 @@ function addTodos() {
   let todosInputValue = todoInput.value.trim();
 
   if (todosInputValue) {
+    // Add fragment for performance improvement, i got hint from gemini how should be added
+    const fragment = document.createDocumentFragment();
     let todoItems = document.createElement("li");
     todoItems.innerHTML = `
     <input type="checkbox" class="checkedTodo">
               <span class="todo-text">${todosInputValue}</span>
               <button class="delete-btn">x</button>
     `;
-    todoList.appendChild(todoItems);
+    fragment.appendChild(todoItems); //added
+    todoList.appendChild(fragment); // changed
     todoInput.value = "";
     handleSaveTodos();
     handleTodosCount();
-    // handleDeleteBtn(todoItems);
-
-    // handleCompletedTodo(todoItems);
   }
 }
-
-// cash the delete-btn class
-//  add eventlistener to it and call remove item on todo items in cal back func.
-// function handleDeleteBtn(todoItems) {
-//   let deleteBtn = todoItems.querySelector(".delete-btn");
-//   deleteBtn.addEventListener("click", () => {
-//     todoItems.remove();
-//     handleSaveTodos();
-//   });
-// }
-
-// cash the checkbox and todo-text classes
-// with help of eventlistener toggle on completed todo
-
-// function handleCompletedTodo(todoItems) {
-//   let checkedBox = todoItems.querySelector(".checkedTodo");
-//   let todoText = todoItems.querySelector(".todo-text");
-//   //   console.log(todoText);
-
-//   checkedBox.addEventListener("click", () => {
-//     todoText.classList.toggle("checked");
-//     handleSaveTodos();
-//   });
-// }
 
 //// save todos in local storage
 // create array of todos
@@ -80,6 +56,8 @@ function handleSaveTodos() {
 // iterate over stored todos and collect them with the inner HTML method.
 function loadTodos() {
   let savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  // add fragment for performance improvement
+  const fragment = document.createDocumentFragment();
   savedTodos.forEach((todo) => {
     let todos = document.createElement("li");
     todos.innerHTML = `
@@ -89,8 +67,9 @@ function loadTodos() {
     }</span>
       <button class="delete-btn">x</button>
     `;
-    todoList.appendChild(todos);
+    fragment.appendChild(todos);
   });
+  todoList.appendChild(fragment);
 }
 
 // handle the todos count
