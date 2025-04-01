@@ -21,12 +21,11 @@ function addTodos() {
     `;
     todoList.appendChild(todoItems);
     todoInput.value = "";
+    handleSaveTodos();
+    // handleDeleteBtn(todoItems);
 
-    handleDeleteBtn(todoItems);
-
-    handleCompletedTodo(todoItems);
+    // handleCompletedTodo(todoItems);
   }
-  handleSaveTodos();
 }
 
 // cash the delete-btn class
@@ -64,13 +63,31 @@ function handleSaveTodos() {
 
   todoItems.forEach((todo) => {
     let todoText = todo.querySelector(".todo-text").textContent;
-    let checkedTodo = todo
-      .querySelector("todo-text")
-      .classList.contains("checkedTodo");
+    let checkedSpan = todo.querySelector("todo-text");
+    let checkedTodo = checkedSpan.classList.contains("checked");
     todos.push({ text: todoText, completed: checkedTodo });
   });
   localStorage.setItem("todos", JSON.stringify(todos));
 }
+
+// add eventListener to todoList and handle the delete and checkBoxes.
+// check if pressed element has class of deleteBtn
+// remove the the todo and call the handleSAVE
+// check else if the selected checked box has class of checked todo
+// toggle the checked class on it
+// call the handleSAFE()
+
+todoList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    let todo = e.target.parentNode;
+    todo.remove();
+    handleSaveTodos();
+  } else if (e.target.classList.contains("checkedTodo")) {
+    let checkedSpan = e.target.nextElementSibling;
+    checkedSpan.classList.toggle("checked");
+    handleSaveTodos();
+  }
+});
 
 // attach event listener to form and validate the input before submit.
 // remember the event prevent default
