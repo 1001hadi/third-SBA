@@ -2,8 +2,11 @@ const todoForm = document.getElementById("todos-form");
 const todoInput = document.getElementById("todo-input");
 const isValidMsg = document.getElementById("isValid-msg");
 const todoList = document.getElementById("todos-list");
+const todoCounter = document.getElementById("todo-counter");
 
+// loading todos and initialize todo counter
 loadTodos();
+handleTodosCount();
 
 // create adding todo helper function
 // make sure remove the white space of input
@@ -24,6 +27,7 @@ function addTodos() {
     todoList.appendChild(todoItems);
     todoInput.value = "";
     handleSaveTodos();
+    handleTodosCount();
     // handleDeleteBtn(todoItems);
 
     // handleCompletedTodo(todoItems);
@@ -73,6 +77,7 @@ function handleSaveTodos() {
 }
 
 // loading todos from local storage.
+// iterate over stored todos and collect them with the inner HTML method.
 function loadTodos() {
   let savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
   savedTodos.forEach((todo) => {
@@ -88,6 +93,13 @@ function loadTodos() {
   });
 }
 
+// handle the todos count
+// select all the li and count the length of them
+function handleTodosCount() {
+  let todos = todoList.querySelectorAll("li");
+  todoCounter.textContent = `Your total todo is: ${todos.length}`;
+}
+
 // add eventListener to todoList and handle the delete and checkBoxes.
 // check if pressed element has class of deleteBtn
 // remove the the todo and call the handleSAVE
@@ -100,6 +112,7 @@ todoList.addEventListener("click", (e) => {
     let todo = e.target.parentNode;
     todo.remove();
     handleSaveTodos();
+    handleTodosCount();
   } else if (e.target.classList.contains("checkedTodo")) {
     let checkedSpan = e.target.nextElementSibling;
     checkedSpan.classList.toggle("checked");
