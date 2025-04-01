@@ -86,6 +86,10 @@ h1 {
   font-size: 1.4rem;
 }
 
+#todo-counter {
+  color: #003049;
+}
+
 .checked {
   text-decoration: line-through;
   color: #666;
