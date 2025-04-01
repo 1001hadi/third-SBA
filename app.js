@@ -58,18 +58,25 @@ function loadTodos() {
   let savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
   // add fragment for performance improvement
   const fragment = document.createDocumentFragment();
-  savedTodos.forEach((todo) => {
-    let todos = document.createElement("li");
-    todos.innerHTML = `
-      <input type="checkbox" class="checkedTodo">
-      <span class="todo-text ${todo.completed ? "checked" : ""}">${
-      todo.text
-    }</span>
-      <button class="delete-btn">x</button>
-    `;
-    fragment.appendChild(todos);
-  });
-  todoList.appendChild(fragment);
+  // Clear existing todos to avoid showing duplicate todo
+  todoList.innerHTML = "";
+
+  if (savedTodos === todoList) {
+    return;
+  } else {
+    savedTodos.forEach((todo) => {
+      let todos = document.createElement("li");
+      todos.innerHTML = `
+        <input type="checkbox" class="checkedTodo">
+        <span class="todo-text ${todo.completed ? "checked" : ""}">${
+        todo.text
+      }</span>
+        <button class="delete-btn">x</button>
+      `;
+      fragment.appendChild(todos);
+    });
+    todoList.appendChild(fragment);
+  }
 }
 
 // handle the todos count
@@ -131,12 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // check for new user
   // if user is new display welcome message with alert()
   // otherwise display their todos and let them know their last visit
-  localStorage.setItem("lastVisit", new Date());
   if (localStorage.getItem("lastVisit")) {
     alert(
       `Welcome back! Your last visit was: ${localStorage.getItem("lastVisit")}`
     );
   } else {
     alert(`Welcome! is This  your first visit?`);
+    localStorage.setItem("lastVisit", new Date().toLocaleString());
   }
 });
